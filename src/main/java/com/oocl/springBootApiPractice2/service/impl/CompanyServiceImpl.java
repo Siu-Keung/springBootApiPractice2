@@ -28,10 +28,7 @@ public class CompanyServiceImpl implements CompanyService {
     public List<CompanyModel> getAllCompaniesModels() {
         List<CompanyModel> resultList = new ArrayList<>();
         for(Company company : this.allCompanies){
-            List<Employee> employeeList;
-            employeeList = this.allEmployees.stream().filter(
-                    item -> item.getId().equals(company.getId()))
-                    .collect(Collectors.toList());
+            List<Employee> employeeList = this.findEmployeesByCompanyId(company.getId());
             resultList.add(new CompanyModel(company, employeeList));
         }
         return resultList;
