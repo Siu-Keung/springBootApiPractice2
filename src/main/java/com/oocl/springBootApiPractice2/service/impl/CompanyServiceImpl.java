@@ -59,4 +59,12 @@ public class CompanyServiceImpl implements CompanyService {
         int endIndex = startIndex + size;
         return this.getAllCompaniesModels().subList(startIndex, endIndex);
     }
+
+    @Override
+    public Boolean addCompany(Company newCompany) {
+        if(this.allCompanies.indexOf(newCompany) != -1)
+            return false;
+        this.allCompanies.add(newCompany);
+        return true;
+    }
 }

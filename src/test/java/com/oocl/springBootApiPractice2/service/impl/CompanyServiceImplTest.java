@@ -5,6 +5,7 @@ import com.oocl.springBootApiPractice2.entity.Company;
 import com.oocl.springBootApiPractice2.entity.Employee;
 import com.oocl.springBootApiPractice2.model.CompanyModel;
 import com.oocl.springBootApiPractice2.service.CompanyService;
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class CompanyServiceImplTest {
     @Autowired
     private List<Employee> employees;
 
+
     @Test
     public void should_get_all_companies() {
         List<CompanyModel> companyList = this.companyService.getAllCompaniesModels();
@@ -48,6 +50,7 @@ public class CompanyServiceImplTest {
         assertThat(companyModel.getEmployees().size(), is(3));
     }
 
+
     @Test
     public void should_get_companies_paging(){
         List<CompanyModel> resultList = this.companyService
@@ -55,7 +58,23 @@ public class CompanyServiceImplTest {
 
         assertThat(resultList.size(), is(1));
         assertThat(resultList.get(0), equalTo(this.companies.get(1)));
-
     }
+
+    @Test
+    public void should_add_company_successfully_when_given_id_not_exists(){
+        boolean result = this.companyService.addCompany(new Company(3, "公司3"));
+
+        assertThat(this.companies.size(), is(3));
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void should_add_company_failed_when_given_id_exists(){
+        boolean result = this.companyService.addCompany(new Company(2, "公司3"));
+
+        assertThat(this.companies.size(), is(2));
+        assertThat(result, is(false));
+    }
+
 
 }
