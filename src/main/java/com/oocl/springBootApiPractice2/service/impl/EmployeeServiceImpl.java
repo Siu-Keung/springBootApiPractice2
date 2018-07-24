@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Dylan Wei
@@ -61,6 +62,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         int startIndex = (pageNum - 1) * size;
         int endIndex = startIndex +  size;
         return this.allEmployees.subList(startIndex, endIndex);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByGender(String gender) {
+        return this.allEmployees.stream().filter(
+                item -> item.getGender().equals(gender)).collect(Collectors.toList());
     }
 }
 
