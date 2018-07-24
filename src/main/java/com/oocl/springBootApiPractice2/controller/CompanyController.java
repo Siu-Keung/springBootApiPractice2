@@ -34,5 +34,12 @@ public class CompanyController {
         return companyService.getCompanyModelById(id).getEmployees();
     }
 
+    @GetMapping("/companies/page/{pageNum}/pageSize/{pageSize}")
+    public List<CompanyModel> getCompanyModelsPaging(
+            @PathVariable Integer pageNum, @PathVariable Integer pageSize
+    ){
+        return companyService.getCompaniesModelsPaging(pageNum, pageSize);
+    }
+
 
 }
