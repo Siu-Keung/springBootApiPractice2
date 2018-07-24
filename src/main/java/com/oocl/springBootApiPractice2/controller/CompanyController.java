@@ -1,5 +1,6 @@
 package com.oocl.springBootApiPractice2.controller;
 
+import com.oocl.springBootApiPractice2.entity.Employee;
 import com.oocl.springBootApiPractice2.model.CompanyModel;
 import com.oocl.springBootApiPractice2.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class CompanyController {
     @GetMapping("/companies/{id}")
     public CompanyModel getCompanyModel(@PathVariable Integer id){
         return companyService.getCompanyModelById(id);
+    }
+
+    @GetMapping("/companies/{id}/employees")
+    public List<Employee> getEmployeesByCompanyId(@PathVariable Integer id){
+        return companyService.getCompanyModelById(id).getEmployees();
     }
 
 
