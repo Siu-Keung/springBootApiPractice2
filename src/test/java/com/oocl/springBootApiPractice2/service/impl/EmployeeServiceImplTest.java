@@ -56,4 +56,15 @@ public class EmployeeServiceImplTest {
 
         verify(this.employeeList).add(any(Employee.class));
     }
+
+    @Test
+    public void updateEmployee(){
+        Employee mockEmployee = mock(Employee.class);
+        when(this.employeeList.indexOf(any())).thenReturn(0);
+        when(this.employeeList.get(0)).thenReturn(mockEmployee);
+
+        boolean succeeded = this.employeeService.updateEmployee(mock(Employee.class));
+
+        assertThat(succeeded, is(true));
+    }
 }
