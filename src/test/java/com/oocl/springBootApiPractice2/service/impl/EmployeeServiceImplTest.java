@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import static org.hamcrest.CoreMatchers.is;
@@ -77,7 +78,16 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void getEmployeePaging(){
-        this.employeeService.getEmployeePaging(0, 0);
+        Employee employee1 = mock(Employee.class);
+        Employee employee2 = mock(Employee.class);
+        Employee employee3 = mock(Employee.class);
+        Employee employee4 = mock(Employee.class);
+        this.employeeList.addAll(Arrays.asList(employee1, employee2, employee3, employee4));
+
+        List<Employee> list = this.employeeService.getEmployeePaging(2, 2);
+
+        assertThat(list.get(0), is(employee3));
+        assertThat(list.get(1), is(employee4));
     }
 
 }
