@@ -29,4 +29,10 @@ public class EmployeeController {
         return this.employeeService.getEmployeeById(id);
     }
 
+    @GetMapping("/employees/page/{pageNum}/pageSize/{pageSize}")
+    public List<Employee> getEmployeesPaging(
+            @PathVariable Integer pageNum, @PathVariable Integer pageSize
+    ){
+        return this.employeeService.getEmployeePaging(pageNum, pageSize);
+    }
 }
