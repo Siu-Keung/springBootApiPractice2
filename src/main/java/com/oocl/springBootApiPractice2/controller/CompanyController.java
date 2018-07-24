@@ -1,11 +1,13 @@
 package com.oocl.springBootApiPractice2.controller;
 
+import com.oocl.springBootApiPractice2.entity.Company;
 import com.oocl.springBootApiPractice2.entity.Employee;
 import com.oocl.springBootApiPractice2.model.CompanyModel;
 import com.oocl.springBootApiPractice2.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -39,6 +41,11 @@ public class CompanyController {
             @PathVariable Integer pageNum, @PathVariable Integer pageSize
     ){
         return companyService.getCompaniesModelsPaging(pageNum, pageSize);
+    }
+
+    @PostMapping("/companies")
+    public String addCompany(Company company){
+        return this.companyService.addCompany(company) ? "succeeded" : "failed";
     }
 
 
