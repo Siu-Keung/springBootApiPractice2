@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -33,5 +34,22 @@ public class CompanyServiceImpl implements CompanyService {
             resultList.add(new CompanyModel(company, employeeList));
         }
         return resultList;
+    }
+
+    private List<Employee> findEmployeesByCompanyId(Integer companyId){
+        return this.allEmployees.stream()
+                .filter(item -> item.getCompanyId().equals(companyId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CompanyModel getCompanyById(Integer id) {
+        Optional<Company> optional = this.allCompanies.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst();
+        if(!optional.isPresent())
+            return null;
+        CompanyModel companyModel = new CompanyModel(optional.get(), findEmployeesByCompanyId(id));
+        return companyModel;
     }
 }

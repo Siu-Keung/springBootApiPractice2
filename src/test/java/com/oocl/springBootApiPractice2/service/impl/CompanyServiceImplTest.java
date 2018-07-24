@@ -40,5 +40,12 @@ public class CompanyServiceImplTest {
         assertThat(companyList.get(1).getCompanyName(), equalTo("公司2"));
     }
 
+    @Test
+    public void should_get_specific_company_given_valid_id(){
+        CompanyModel companyModel = this.companyService.getCompanyById(2);
+
+        assertThat(companyModel.getId(), is(2));
+        assertThat(companyModel.getEmployees().size(), is(3));
+    }
 
 }

@@ -13,6 +13,6 @@ public interface CompanyService {
 
     List<CompanyModel> getAllCompanies();
 
-
+    CompanyModel getCompanyById(Integer id);
 
 }
