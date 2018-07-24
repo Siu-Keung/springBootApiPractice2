@@ -33,7 +33,7 @@ public class CompanyServiceImplTest {
 
     @Test
     public void should_get_all_companies() {
-        List<CompanyModel> companyList = this.companyService.getAllCompanies();
+        List<CompanyModel> companyList = this.companyService.getAllCompaniesModels();
 
         assertThat(companyList.size(), is(2));
         assertThat(companyList.get(0).getCompanyName(), equalTo("公司1"));
@@ -42,10 +42,20 @@ public class CompanyServiceImplTest {
 
     @Test
     public void should_get_specific_company_given_valid_id(){
-        CompanyModel companyModel = this.companyService.getCompanyById(2);
+        CompanyModel companyModel = this.companyService.getCompanyModelById(2);
 
         assertThat(companyModel.getId(), is(2));
         assertThat(companyModel.getEmployees().size(), is(3));
+    }
+
+    @Test
+    public void should_get_companies_paging(){
+        List<CompanyModel> resultList = this.companyService
+                .getCompaniesModelsPaging(2, 1);
+
+        assertThat(resultList.size(), is(1));
+        assertThat(resultList.get(0), equalTo(this.companies.get(1)));
+
     }
 
 }

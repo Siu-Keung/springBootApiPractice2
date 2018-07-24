@@ -24,7 +24,7 @@ public class CompanyServiceImpl implements CompanyService {
     private List<Employee> allEmployees;
 
     @Override
-    public List<CompanyModel> getAllCompanies() {
+    public List<CompanyModel> getAllCompaniesModels() {
         List<CompanyModel> resultList = new ArrayList<>();
         for(Company company : this.allCompanies){
             List<Employee> employeeList;
@@ -43,7 +43,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyModel getCompanyById(Integer id) {
+    public CompanyModel getCompanyModelById(Integer id) {
         Optional<Company> optional = this.allCompanies.stream()
                 .filter(item -> item.getId().equals(id))
                 .findFirst();
@@ -51,5 +51,12 @@ public class CompanyServiceImpl implements CompanyService {
             return null;
         CompanyModel companyModel = new CompanyModel(optional.get(), findEmployeesByCompanyId(id));
         return companyModel;
+    }
+
+    @Override
+    public List<CompanyModel> getCompaniesModelsPaging(int pageNum, int size) {
+        int startIndex = (pageNum - 1) * size;
+        int endIndex = startIndex + size;
+        return this.getAllCompaniesModels().subList(startIndex, endIndex);
     }
 }

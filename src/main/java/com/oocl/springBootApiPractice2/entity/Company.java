@@ -1,6 +1,7 @@
 package com.oocl.springBootApiPractice2.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Dylan Wei
@@ -34,4 +35,13 @@ public class Company {
         this.id = id;
         this.companyName = companyName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Company)) return false;
+        Company company = (Company) o;
+        return Objects.equals(getId(), company.getId());
+    }
+
 }

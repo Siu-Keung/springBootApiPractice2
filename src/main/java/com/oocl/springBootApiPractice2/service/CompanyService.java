@@ -11,8 +11,11 @@ import java.util.List;
  */
 public interface CompanyService {
 
-    List<CompanyModel> getAllCompanies();
+    List<CompanyModel> getAllCompaniesModels();
 
-    CompanyModel getCompanyById(Integer id);
+    CompanyModel getCompanyModelById(Integer id);
+
+    List<CompanyModel> getCompaniesModelsPaging(int pageNum, int size);
+
 
 }

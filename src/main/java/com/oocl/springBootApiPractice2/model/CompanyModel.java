@@ -4,6 +4,7 @@ import com.oocl.springBootApiPractice2.entity.Company;
 import com.oocl.springBootApiPractice2.entity.Employee;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Dylan Wei
@@ -28,4 +29,6 @@ public class CompanyModel extends Company {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+
 }
