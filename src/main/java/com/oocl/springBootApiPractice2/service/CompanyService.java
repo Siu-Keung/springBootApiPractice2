@@ -20,4 +20,6 @@ public interface CompanyService {
     Boolean addCompany(Company newCompany);
 
     Boolean updateCompany(Company newCompany);
+
+    Boolean removeCompanyAndEmployees(Integer companyId);
 }

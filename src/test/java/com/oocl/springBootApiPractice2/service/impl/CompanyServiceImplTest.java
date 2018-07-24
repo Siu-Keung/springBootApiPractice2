@@ -95,5 +95,14 @@ public class CompanyServiceImplTest {
         assertThat(succeeded, is(false));
     }
 
+    @Test
+    public void should_remove_company_and_employees(){
+        boolean succeeded = this.companyService.removeCompanyAndEmployees(1);
+
+        assertThat(succeeded, is(true));
+        assertThat(this.employees.size(), is(3));
+        assertThat(this.companies.size(), is(2));
+    }
+
 
 }

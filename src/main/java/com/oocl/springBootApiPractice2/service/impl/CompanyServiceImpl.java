@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,6 +77,22 @@ public class CompanyServiceImpl implements CompanyService {
             return false;
         Company targetCompany = optional.get();
         targetCompany.setCompanyName(newCompany.getCompanyName());
+        return true;
+    }
+
+    @Override
+    public Boolean removeCompanyAndEmployees(Integer companyId) {
+        Optional<Company> optional = this.allCompanies.stream()
+                .filter(item -> item.getId().equals(companyId)).findFirst();
+        if(!optional.isPresent())
+            return false;
+        Company targetCompany = optional.get();
+        Iterator<Employee> iterator = this.allEmployees.iterator();
+        while(iterator.hasNext()){
+            Employee employee = iterator.next();
+            if(employee.getCompanyId().equals(targetCompany.getId()))
+                iterator.remove();
+        }
         return true;
     }
 }
