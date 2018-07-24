@@ -12,4 +12,12 @@ public interface EmployeeService {
 
     List<Employee> getAllEmployees();
 
+    Employee getEmployeeById(Integer id);
+
+    Boolean addEmployee(Employee employee);
+
+    Boolean updateEmployee(Employee employee);
+
+    Boolean removeEmployee(Integer id);
+
 }
