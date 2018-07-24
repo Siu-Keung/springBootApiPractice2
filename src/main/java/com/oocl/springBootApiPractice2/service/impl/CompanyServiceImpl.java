@@ -67,4 +67,15 @@ public class CompanyServiceImpl implements CompanyService {
         this.allCompanies.add(newCompany);
         return true;
     }
+
+    @Override
+    public Boolean updateCompany(Company newCompany) {
+        Optional<Company> optional =  this.allCompanies.stream()
+                .filter(item -> item.equals(newCompany)).findFirst();
+        if(!optional.isPresent())
+            return false;
+        Company targetCompany = optional.get();
+        targetCompany.setCompanyName(newCompany.getCompanyName());
+        return true;
+    }
 }

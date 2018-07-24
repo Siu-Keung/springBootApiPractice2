@@ -76,5 +76,24 @@ public class CompanyServiceImplTest {
         assertThat(result, is(false));
     }
 
+    @Test
+    public void should_update_successfully_when_id_valid(){
+        Company company = new Company(1, "公司一");
+
+        boolean succeeded = this.companyService.updateCompany(company);
+
+        assertThat(this.companies.get(0).getCompanyName(), is("公司一"));
+        assertThat(succeeded, is(true));
+    }
+
+    @Test
+    public void should_update_failed_when_id_invalid() {
+        Company company = new Company(999, "公司一");
+
+        boolean succeeded = this.companyService.updateCompany(company);
+
+        assertThat(succeeded, is(false));
+    }
+
 
 }

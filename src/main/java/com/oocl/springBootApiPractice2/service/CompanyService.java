@@ -18,4 +18,6 @@ public interface CompanyService {
     List<CompanyModel> getCompaniesModelsPaging(int pageNum, int size);
 
     Boolean addCompany(Company newCompany);
+
+    Boolean updateCompany(Company newCompany);
 }
