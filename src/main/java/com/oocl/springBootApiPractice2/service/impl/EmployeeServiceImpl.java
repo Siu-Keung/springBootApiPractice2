@@ -55,5 +55,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Boolean removeEmployee(Integer id) {
         return this.allEmployees.remove(new Employee(id));
     }
+
+    @Override
+    public List<Employee> getEmployeePaging(int offset, int size) {
+        throw new NotImplementedException();
+    }
 }
 

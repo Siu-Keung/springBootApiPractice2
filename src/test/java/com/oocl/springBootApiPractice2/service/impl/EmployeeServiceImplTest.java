@@ -74,4 +74,10 @@ public class EmployeeServiceImplTest {
 
         verify(this.employeeList).remove(any());
     }
+
+    @Test
+    public void getEmployeePaging(){
+        this.employeeService.getEmployeePaging(0, 0);
+    }
+
 }
