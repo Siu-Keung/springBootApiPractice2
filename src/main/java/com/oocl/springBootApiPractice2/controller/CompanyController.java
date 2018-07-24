@@ -5,10 +5,7 @@ import com.oocl.springBootApiPractice2.entity.Employee;
 import com.oocl.springBootApiPractice2.model.CompanyModel;
 import com.oocl.springBootApiPractice2.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,6 +43,11 @@ public class CompanyController {
     @PostMapping("/companies")
     public String addCompany(Company company){
         return this.companyService.addCompany(company) ? "succeeded" : "failed";
+    }
+
+    @PutMapping("/companies/{id}")
+    public String updateCompany(Company company){
+        return this.companyService.updateCompany(company) ? "succeeded" : "failed";
     }
 
 
