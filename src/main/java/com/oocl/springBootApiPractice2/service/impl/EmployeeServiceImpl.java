@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeePaging(int offset, int size) {
+    public List<Employee> getEmployeePaging(int pageNum, int size) {
         throw new NotImplementedException();
     }
 }

@@ -20,6 +20,6 @@ public interface EmployeeService {
 
     Boolean removeEmployee(Integer id);
 
-    List<Employee> getEmployeePaging(int offset, int size);
+    List<Employee> getEmployeePaging(int pageNum, int size);
 
 }

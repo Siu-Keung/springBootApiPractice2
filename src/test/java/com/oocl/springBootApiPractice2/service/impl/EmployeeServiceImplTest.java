@@ -44,14 +44,14 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void getAllEmployees() {
+    public void should_get_all_employees() {
         List<Employee> resultList = this.employeeService.getAllEmployees();
         System.out.println(resultList);
         assertThat(resultList, is(this.employeeList));
     }
 
     @Test
-    public void addEmployee(){
+    public void should_add_employee_to_list(){
         when(this.employeeList.indexOf(any(Employee.class))).thenReturn(-1);
         this.employeeService.addEmployee(mock(Employee.class));
 
@@ -59,7 +59,7 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void updateEmployee(){
+    public void should_update_employee_when_given_valid_new_employee(){
         Employee mockEmployee = mock(Employee.class);
         when(this.employeeList.indexOf(any())).thenReturn(0);
         when(this.employeeList.get(0)).thenReturn(mockEmployee);
@@ -70,14 +70,14 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void removeEmployee(){
+    public void should_remove_employee_successfully_when_given_valid_id(){
         this.employeeService.removeEmployee(123456789);
 
         verify(this.employeeList).remove(any());
     }
 
     @Test
-    public void getEmployeePaging(){
+    public void should_get_employees_paging(){
         Employee employee1 = mock(Employee.class);
         Employee employee2 = mock(Employee.class);
         Employee employee3 = mock(Employee.class);
