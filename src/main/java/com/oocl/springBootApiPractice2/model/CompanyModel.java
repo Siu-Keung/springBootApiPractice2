@@ -12,12 +12,12 @@ import java.util.List;
 public class CompanyModel extends Company {
     private List<Employee> employees;
 
-    public CompanyModel(String companyName) {
-        super(companyName);
+    public CompanyModel(Company company){
+        super(company.getId(), company.getCompanyName());
     }
 
-    public CompanyModel(String companyName, List<Employee> employees) {
-        super(companyName);
+    public CompanyModel(Company company, List<Employee> employees) {
+        super(company.getId(), company.getCompanyName());
         this.employees = employees;
     }
 
@@ -27,9 +27,5 @@ public class CompanyModel extends Company {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
-    }
-
-    public Integer getEmployeesNumber(){
-        return this.employees.size();
     }
 }

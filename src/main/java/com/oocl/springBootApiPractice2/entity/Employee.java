@@ -15,24 +15,25 @@ public class Employee {
     private Integer age;
     private String gender;
     private Double salary;
-    private String companyName;
+    private Integer companyId;
 
-    public String getCompanyName() {
-        return companyName;
+
+    public Integer getCompanyId() {
+        return companyId;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
-    public Employee(Integer id, String name, Integer age, String gender, Double salary, String companyName) {
+    public Employee(Integer id, String name, Integer age, String gender, Double salary, Integer companyId) {
 
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.salary = salary;
-        this.companyName = companyName;
+        this.companyId = companyId;
     }
 
     public Employee(Integer id, String name, Integer age, String gender) {

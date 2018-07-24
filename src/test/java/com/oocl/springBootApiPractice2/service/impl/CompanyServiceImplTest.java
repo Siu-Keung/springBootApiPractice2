@@ -39,4 +39,6 @@ public class CompanyServiceImplTest {
         assertThat(companyList.get(0).getCompanyName(), equalTo("公司1"));
         assertThat(companyList.get(1).getCompanyName(), equalTo("公司2"));
     }
+
+
 }
