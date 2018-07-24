@@ -67,4 +67,11 @@ public class EmployeeServiceImplTest {
 
         assertThat(succeeded, is(true));
     }
+
+    @Test
+    public void removeEmployee(){
+        this.employeeService.removeEmployee(123456789);
+
+        verify(this.employeeList).remove(any());
+    }
 }
