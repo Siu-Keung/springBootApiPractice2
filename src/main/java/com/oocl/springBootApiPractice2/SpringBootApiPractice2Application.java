@@ -1,5 +1,6 @@
 package com.oocl.springBootApiPractice2;
 
+import com.oocl.springBootApiPractice2.entity.Company;
 import com.oocl.springBootApiPractice2.entity.Employee;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,11 +18,22 @@ public class SpringBootApiPractice2Application {
 
 	@Bean
 	public List<Employee> allEmployees(){
-		List<Employee> allEmployees = new ArrayList<>();
-		allEmployees.add(new Employee(1, "小红", 19, "女"));
-		allEmployees.add(new Employee(2, "小智", 15, "男"));
-		allEmployees.add(new Employee(3, "小刚", 16, "男"));
-		allEmployees.add(new Employee(4, "小霞", 15, "女"));
-		return allEmployees;
+        List<Employee> employeesList = new ArrayList<>();
+        employeesList.add(new Employee(1, "小红", 19, "女", 5000.0, "公司1"));
+        employeesList.add(new Employee(2, "小智", 15, "男", 5000.0, "公司1"));
+        employeesList.add(new Employee(3, "小刚", 16, "男", 5000.0, "公司1"));
+        employeesList.add(new Employee(4, "小霞", 15, "女", 5000.0, "公司1"));
+        employeesList.add(new Employee(5, "小青", 19, "女", 5000.0, "公司2"));
+        employeesList.add(new Employee(6, "小李", 15, "男", 5000.0, "公司2"));
+        employeesList.add(new Employee(7, "小光", 16, "男", 5000.0, "公司2"));
+        return employeesList;
 	}
+
+	@Bean
+    public List<Company> allCompanies(){
+        List<Company> companyList = new ArrayList<>();
+        companyList.add(new Company("公司1"));
+        companyList.add(new Company("公司2"));
+        return companyList;
+    }
 }

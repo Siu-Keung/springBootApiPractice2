@@ -14,20 +14,44 @@ public class Employee {
     private String name;
     private Integer age;
     private String gender;
+    private Double salary;
+    private String companyName;
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public Employee(Integer id, String name, Integer age, String gender, Double salary, String companyName) {
+
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.salary = salary;
+        this.companyName = companyName;
+    }
+
+    public Employee(Integer id, String name, Integer age, String gender) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
 
     public Employee(Integer id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                '}';
     }
 
     public Integer getId() {
@@ -66,19 +90,12 @@ public class Employee {
 
     }
 
-    public Employee(Integer id, String name, Integer age, String gender) {
+    public Employee(Integer id, String name, Integer age, String gender, Double salary) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(getId(), employee.getId());
+        this.salary = salary;
     }
 
 }
