@@ -58,7 +58,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getEmployeePaging(int pageNum, int size) {
-        throw new NotImplementedException();
+        int startIndex = (pageNum - 1) * size;
+        int endIndex = startIndex +  size;
+        return this.allEmployees.subList(startIndex, endIndex);
     }
 }
 

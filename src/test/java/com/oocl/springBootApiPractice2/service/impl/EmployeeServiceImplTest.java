@@ -80,14 +80,13 @@ public class EmployeeServiceImplTest {
     public void should_get_employees_paging(){
         Employee employee1 = mock(Employee.class);
         Employee employee2 = mock(Employee.class);
-        Employee employee3 = mock(Employee.class);
-        Employee employee4 = mock(Employee.class);
-        this.employeeList.addAll(Arrays.asList(employee1, employee2, employee3, employee4));
+        when(this.employeeList.get(2)).thenReturn(employee1);
+        when(this.employeeList.get(3)).thenReturn(employee2);
+        when(this.employeeList.size()).thenReturn(4);
 
-        List<Employee> list = this.employeeService.getEmployeePaging(2, 2);
+        this.employeeService.getEmployeePaging(2, 2);
 
-        assertThat(list.get(0), is(employee3));
-        assertThat(list.get(1), is(employee4));
+        verify(employeeList).subList(2, 4);
     }
 
 }
