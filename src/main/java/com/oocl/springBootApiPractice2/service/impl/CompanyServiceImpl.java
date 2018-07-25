@@ -19,10 +19,14 @@ import java.util.stream.Collectors;
  */
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    @Autowired
     private List<Company> allCompanies;
-    @Autowired
     private List<Employee> allEmployees;
+
+    @Autowired
+    public CompanyServiceImpl(List<Company> allCompanies, List<Employee> allEmployees){
+        this.allCompanies = allCompanies;
+        this.allEmployees = allEmployees;
+    }
 
     @Override
     public List<CompanyModel> getAllCompaniesModels() {
@@ -90,6 +94,7 @@ public class CompanyServiceImpl implements CompanyService {
             if(employee.getCompanyId().equals(targetCompany.getId()))
                 iterator.remove();
         }
+        this.allCompanies.remove(targetCompany);
         return true;
     }
 }
