@@ -3,9 +3,9 @@ package com.oocl.springBootApiPractice2.service.impl;
 import com.oocl.springBootApiPractice2.SpringBootApiPractice2Application;
 import com.oocl.springBootApiPractice2.entity.Employee;
 import com.oocl.springBootApiPractice2.service.EmployeeService;
-import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,64 +30,61 @@ import static org.mockito.Mockito.when;
  * @author Dylan Wei
  * @date 2018-07-24 17:51
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringBootApiPractice2Application.class)
 public class EmployeeServiceImplTest {
-    @Mock
-    private List<Employee> employeeList;
+    private List<Employee> employeesList;
 
-    @InjectMocks
     private EmployeeServiceImpl employeeService;
 
-    @Before
+    @BeforeEach
     public void setUp(){
-        MockitoAnnotations.initMocks(this);
+        this.employeesList = new ArrayList<>();
+        this.employeesList.add(new Employee(1, "小红", 19, "女", 5000.0, 1));
+        this.employeesList.add(new Employee(2, "小智", 15, "男", 5000.0, 1));
+        this.employeesList.add(new Employee(3, "小刚", 16, "男", 5000.0, 2));
+        this.employeeService = new EmployeeServiceImpl(this.employeesList);
     }
 
     @Test
     public void should_get_all_employees() {
         List<Employee> resultList = this.employeeService.getAllEmployees();
-        System.out.println(resultList);
-        assertThat(resultList, is(this.employeeList));
+
+        assertThat(resultList, is(this.employeesList));
     }
 
     @Test
     public void should_add_employee_to_list(){
-        when(this.employeeList.indexOf(any(Employee.class))).thenReturn(-1);
-        this.employeeService.addEmployee(mock(Employee.class));
+        Employee employee = new Employee();
 
-        verify(this.employeeList).add(any(Employee.class));
+        boolean succeeded = this.employeeService.addEmployee(employee);
+
+        assertThat(succeeded, is(true));
+        assertThat(this.employeesList.size(), is(4));
     }
 
     @Test
     public void should_update_employee_when_given_valid_new_employee(){
-        Employee mockEmployee = mock(Employee.class);
-        when(this.employeeList.indexOf(any())).thenReturn(0);
-        when(this.employeeList.get(0)).thenReturn(mockEmployee);
+        Employee employee = new Employee(2, "小李", 15, "男", 5000.0, 1);
 
-        boolean succeeded = this.employeeService.updateEmployee(mock(Employee.class));
+        boolean succeeded = this.employeeService.updateEmployee(employee);
 
         assertThat(succeeded, is(true));
+        assertThat(this.employeesList.get(1).getName(), equalTo("小李"));
     }
 
     @Test
     public void should_remove_employee_successfully_when_given_valid_id(){
-        this.employeeService.removeEmployee(123456789);
+        boolean succeeded = this.employeeService.removeEmployee(1);
 
-        verify(this.employeeList).remove(any());
+        assertThat(succeeded, is(true));
+        assertThat(this.employeesList.size(), is(2));
     }
 
     @Test
     public void should_get_employees_paging(){
-        Employee employee1 = mock(Employee.class);
-        Employee employee2 = mock(Employee.class);
-        when(this.employeeList.get(2)).thenReturn(employee1);
-        when(this.employeeList.get(3)).thenReturn(employee2);
-        when(this.employeeList.size()).thenReturn(4);
+        List<Employee> resultList = this.employeeService.getEmployeePaging(2, 2);
 
-        this.employeeService.getEmployeePaging(2, 2);
-
-        verify(employeeList).subList(2, 4);
+        assertThat(resultList.size(), is(1));
+        assertThat(resultList.get(0), equalTo(this.employeesList.get(2)));
     }
 
 

@@ -15,8 +15,12 @@ import java.util.stream.Collectors;
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    @Autowired
     private List<Employee> allEmployees;
+
+    @Autowired
+    public EmployeeServiceImpl(List<Employee> allEmployees){
+        this.allEmployees = allEmployees;
+    }
 
     @Override
     public List<Employee> getAllEmployees() {
@@ -61,6 +65,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getEmployeePaging(int pageNum, int size) {
         int startIndex = (pageNum - 1) * size;
         int endIndex = startIndex +  size;
+        if(endIndex > this.allEmployees.size())
+            endIndex = this.allEmployees.size();
         return this.allEmployees.subList(startIndex, endIndex);
     }
 
